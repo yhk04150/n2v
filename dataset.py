@@ -5,7 +5,7 @@ from skimage import transform
 import matplotlib.pyplot as plt
 import os
 import copy
-
+from skimage.color import rgb2gray
 
 class Dataset(torch.utils.data.Dataset):
     """
@@ -63,6 +63,13 @@ class Dataset(torch.utils.data.Dataset):
         # data = {'input': input, 'label': label}
 
         data = plt.imread(os.path.join(self.data_dir, self.lst_data[index]))
+        ##original data type numpy.ndarray (481, 321, 3)
+ 
+        #convert to rgb to gray
+        if data.shape[-1] ==3:
+           data = rgb2gray(data)
+           data = np.expand_dims(data, axis=2)
+
 
         if data.dtype == np.uint8:
             data = data / 255.0
