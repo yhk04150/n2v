@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 
 from torchvision import transforms
-from torch.utils.tensorboard import SummaryWriter
+#from torch.utils.tensorboard import SummaryWriter
 import matplotlib.pyplot as plt
 
 ##
@@ -181,8 +181,8 @@ class Train:
             netG, optimG, st_epoch = self.load(dir_chck, netG, optimG, mode=mode)
 
         ## setup tensorboard
-        writer_train = SummaryWriter(log_dir=dir_log_train)
-        writer_val = SummaryWriter(log_dir=dir_log_val)
+        #writer_train = SummaryWriter(log_dir=dir_log_train)
+        #writer_val = SummaryWriter(log_dir=dir_log_val)
 
         for epoch in range(st_epoch + 1, num_epoch + 1):
             ## training phase
@@ -226,9 +226,9 @@ class Train:
                     output = np.clip(output, 0, 1)
                     dif = np.clip(abs(label - input), 0, 1)
 
-                    writer_train.add_images('input', input, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
-                    writer_train.add_images('output', output, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
-                    writer_train.add_images('label', label, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
+                    #writer_train.add_images('input', input, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
+                    #writer_train.add_images('output', output, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
+                    #writer_train.add_images('label', label, num_batch_train * (epoch - 1) + batch, dataformats='NHWC')
 
                     for j in range(label.shape[0]):
                         # name = num_train * (epoch - 1) + num_batch_train * (batch - 1) + j
@@ -246,7 +246,7 @@ class Train:
 
                         append_index(dir_result_train, fileset)
 
-            writer_train.add_scalar('loss_G', np.mean(loss_G_train), epoch)
+            #writer_train.add_scalar('loss_G', np.mean(loss_G_train), epoch)
 
             ## validation phase
             with torch.no_grad():
@@ -284,9 +284,9 @@ class Train:
                         output = np.clip(output, 0, 1)
                         dif = np.clip(abs(label - input), 0, 1)
 
-                        writer_val.add_images('input', input, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
-                        writer_val.add_images('output', output, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
-                        writer_val.add_images('label', label, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+                        #writer_val.add_images('input', input, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+                        #writer_val.add_images('output', output, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
+                        #writer_val.add_images('label', label, num_batch_val * (epoch - 1) + batch, dataformats='NHWC')
 
                         for j in range(label.shape[0]):
                             # name = num_train * (epoch - 1) + num_batch_train * (batch - 1) + j
@@ -304,7 +304,7 @@ class Train:
 
                             append_index(dir_result_val, fileset)
 
-                writer_val.add_scalar('loss_G', np.mean(loss_G_val), epoch)
+                #writer_val.add_scalar('loss_G', np.mean(loss_G_val), epoch)
 
             # update schduler
             # schedG.step()
@@ -314,8 +314,8 @@ class Train:
             if (epoch % num_freq_save) == 0:
                 self.save(dir_chck, netG, optimG, epoch)
 
-        writer_train.close()
-        writer_val.close()
+        #writer_train.close()
+        #writer_val.close()
 
     def test(self):
         mode = self.mode
@@ -329,6 +329,7 @@ class Train:
         nch_ker = self.nch_ker
 
         size_data = (self.ny_in, self.nx_in, self.nch_in)
+
         size_window = (5, 5)
 
 

@@ -77,3 +77,4 @@ After the above comment executes, go **http://localhost:6006**
 --!>
 
 python main.py --mode train --scope resnet  --name_data bsd300  --dir_data ./datasets  --dir_log ./log    --dir_checkpoint ./checkpoint   --gpu_ids 6
+python main.py --mode train --scope resnet  --name_data bsd300  --dir_data ./datasets  --dir_log ./log    --dir_checkpoint ./checkpoint_check   --gpu_ids 6 --nch_out 1 --nch_in 1 

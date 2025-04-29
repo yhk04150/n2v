@@ -14,7 +14,7 @@ class Dataset(torch.utils.data.Dataset):
        stuff<number>_density.pt
     """
 
-    def __init__(self, data_dir, data_type='float32', transform=None, sgm=25, ratio=0.9, size_data=(256, 256, 3), size_window=(5, 5)):
+    def __init__(self, data_dir, data_type='float32', transform=None, sgm=25, ratio=0.9, size_data=(704, 704, 1), size_window=(5, 5)):
         self.data_dir = data_dir
         self.transform = transform
         self.data_type = data_type

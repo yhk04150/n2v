@@ -2,3 +2,4 @@
 *.datasets
 *.drive
 *.log
+*.checkpoint_check
